@@ -17,5 +17,5 @@ app.listen(porta, () => {
 });
 
 app.get('/', (request, response) => {
-    response.send('Hello World!!!');
+    response.send('Documentação da API');
 });
