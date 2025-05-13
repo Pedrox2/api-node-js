@@ -5,9 +5,10 @@ module.exports = {
         try {
 
             const sql= `
-            SELECT 
-            categ_id, categ_nome, 
-            categ_icone FROM categorias;
+                SELECT 
+                    categ_id, categ_nome, 
+                    categ_icone 
+                FROM categorias;
             `;
 
             const [rows] = await db.query(sql);
@@ -15,7 +16,7 @@ module.exports = {
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Lista de Categorias',
-                itens: rows.length ,
+                itens: rows.length,
                 dados: rows
             });
         } catch (error) {
