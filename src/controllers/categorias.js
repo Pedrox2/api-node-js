@@ -29,10 +29,30 @@ module.exports = {
     }, 
     async cadastrarCategorias(request, response) {
         try {
+
+            const { categ_nome, categ_icone} = request.body;
+
+            const sql = `
+                INSERT INTO categorias 
+                    ( categ_nome, categ_icone) 
+                VALUES
+                (?,?);
+            `;
+
+            const values = [ categ_nome, categ_icone];
+
+            const [result] = await db.query(sql, values);
+
+            const dados = {
+                categ_id: result.insertId,
+                categ_nome, 
+                categ_icone,
+            };
+           
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Cadastro de Categorias', 
-                dados: null
+                dados: dados
             });
         } catch (error) {
             return response.status(500).json({
