@@ -64,10 +64,36 @@ module.exports = {
     }, 
     async editarCategorias(request, response) {
         try {
+
+            const {categ_nome, categ_icone} = request.body;
+            const {categ_id} = request.params;
+            const sql = `
+                 UPDATE categorias SET
+                    categ_nome=? , categ_icone=? 
+                WHERE
+                categ_id= ?;
+            `;
+
+            const values= [ categ_nome, categ_icone, categ_id];
+
+            const [result] = await db.query(sql, values);
+
+            if (result.affectedRows === 0) {
+                return response.status(404).json({
+                    sucesso: false,
+                    mensagem: `Categorias ${categ_id} não encontrado`,
+                    dados: null
+                });    
+            }
+            const dados = {
+                categ_id,
+                categ_nome, 
+                categ_icone
+            };
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Alteração no cadastro de Categorias', 
-                dados: null
+                mensagem: `Categoria ${categ_id} atualizado com sucesso!`, 
+                dados
             });
         } catch (error) {
             return response.status(500).json({

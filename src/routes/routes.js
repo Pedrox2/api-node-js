@@ -5,7 +5,7 @@ const CategoriasController = require('../controllers/categorias');
 
 router.get('/categorias', CategoriasController.listarCategorias); 
 router.post('/categorias', CategoriasController.cadastrarCategorias); 
-router.patch('/categorias', CategoriasController.editarCategorias); 
+router.patch('/categorias/:categ_id', CategoriasController.editarCategorias); 
 router.delete('/categorias', CategoriasController.apagarCategorias); 
 
 
