@@ -6,7 +6,7 @@ const CategoriasController = require('../controllers/categorias');
 router.get('/categorias', CategoriasController.listarCategorias); 
 router.post('/categorias', CategoriasController.cadastrarCategorias); 
 router.patch('/categorias/:categ_id', CategoriasController.editarCategorias); 
-router.delete('/categorias', CategoriasController.apagarCategorias); 
+router.delete('/categorias/:categ_id', CategoriasController.apagarCategorias); 
 
 
 module.exports = router;
